@@ -1,9 +1,9 @@
 package by.step.hibernate.example.dao.models;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
-@Table(name = "departments")
 public class Departments {
 
     @Id
@@ -13,6 +13,9 @@ public class Departments {
 
     @Column(name = "building")
     private int building;
+
+    @OneToMany (mappedBy = "department", fetch = FetchType.EAGER)
+    private Set<Wards> wards;
 
     @Column(name = "financing")
     private double financing;
@@ -24,14 +27,6 @@ public class Departments {
     private String nameDepartment;
 
     public Departments(){}
-
-    public Departments(int id, int building, double financing, double floor, String nameDepartment) {
-        this.id = id;
-        this.building = building;
-        this.financing = financing;
-        this.floor = floor;
-        this.nameDepartment = nameDepartment;
-    }
 
     public int getId() {
         return id;
@@ -49,20 +44,20 @@ public class Departments {
         this.building = building;
     }
 
+    public Set<Wards> getWards() {
+        return wards;
+    }
+
+    public void setWards(Set<Wards> wards) {
+        this.wards = wards;
+    }
+
     public double getFinancing() {
         return financing;
     }
 
     public void setFinancing(double financing) {
         this.financing = financing;
-    }
-
-    public String getNameDepartment() {
-        return nameDepartment;
-    }
-
-    public void setNameDepartment(String nameDepartment) {
-        this.nameDepartment = nameDepartment;
     }
 
     public double getFloor() {
@@ -73,6 +68,14 @@ public class Departments {
         this.floor = floor;
     }
 
+    public String getNameDepartment() {
+        return nameDepartment;
+    }
+
+    public void setNameDepartment(String nameDepartment) {
+        this.nameDepartment = nameDepartment;
+    }
+
     @Override
     public String toString() {
         return "Departments{" +
@@ -80,6 +83,7 @@ public class Departments {
                 ", building=" + building +
                 ", financing=" + financing +
                 ", floor=" + floor +
+                ", wards=" + wards +
                 ", nameDepartment='" + nameDepartment + '\'' +
                 '}';
     }

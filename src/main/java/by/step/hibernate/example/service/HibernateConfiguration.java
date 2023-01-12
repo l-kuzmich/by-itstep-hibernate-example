@@ -2,6 +2,7 @@ package by.step.hibernate.example.service;
 
 import by.step.hibernate.example.dao.models.Departments;
 import by.step.hibernate.example.dao.models.Doctors;
+import by.step.hibernate.example.dao.models.Wards;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -35,8 +36,9 @@ public class HibernateConfiguration {
 
                 configuration.setProperties(settings);
 
-                configuration.addAnnotatedClass(Doctors.class);
+                //configuration.addAnnotatedClass(Doctors.class);
                 configuration.addAnnotatedClass(Departments.class);
+                configuration.addAnnotatedClass(Wards.class);
 
                 ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                         .applySettings(configuration.getProperties()).build();

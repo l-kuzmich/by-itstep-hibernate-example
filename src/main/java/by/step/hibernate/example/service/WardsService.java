@@ -1,6 +1,6 @@
 package by.step.hibernate.example.service;
 
-import by.step.hibernate.example.dao.models.Doctors;
+import by.step.hibernate.example.dao.models.Wards;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -10,21 +10,21 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
 
-public class UserService {
+public class WardsService {
 
-    public List<Doctors> getAllDoctors() {
+    public List<Wards> getAllWards() {
         Transaction transaction = null;
-        List<Doctors> resultSet = null;
+        List<Wards> resultSet = null;
         try (Session session = HibernateConfiguration.getSessionFactory().openSession()) {
 
             transaction = session.beginTransaction();
 
             CriteriaBuilder cb = session.getCriteriaBuilder();
-            CriteriaQuery<Doctors> cq = cb.createQuery(Doctors.class);
-            Root<Doctors> rootEntry = cq.from(Doctors.class);
-            CriteriaQuery<Doctors> all = cq.select(rootEntry);
+            CriteriaQuery<Wards> cq = cb.createQuery(Wards.class);
+            Root<Wards> rootEntry = cq.from(Wards.class);
+            CriteriaQuery<Wards> all = cq.select(rootEntry);
 
-            TypedQuery<Doctors> allQuery = session.createQuery(all);
+            TypedQuery<Wards> allQuery = session.createQuery(all);
 
             resultSet = allQuery.getResultList();
             transaction.commit();
@@ -38,13 +38,13 @@ public class UserService {
         return resultSet;
     }
 
-    public void saveDoctor(Doctors doctors) {
+    public void saveWards(Wards wards) {
         Transaction transaction = null;
         try (Session session = HibernateConfiguration.getSessionFactory().openSession()) {
             // start a transaction
             transaction = session.beginTransaction();
             // save the student object
-            session.saveOrUpdate(doctors);
+            session.saveOrUpdate(wards);
             // commit transaction
             transaction.commit();
         } catch (Exception e) {
